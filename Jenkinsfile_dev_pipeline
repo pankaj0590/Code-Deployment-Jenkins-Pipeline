@@ -1,0 +1,49 @@
+node {
+	def RepositoryName  = params.MicroService
+    def Branch = params.BranchName
+	  currentBuild.displayName = RepositoryName + " # ${env.BUILD_ID}"
+    def mvnHome = tool 'M3'
+    def javaHome = tool 'java1.8'
+   	clean()
+   	checkoutProject(RepositoryName,Branch)
+   	build(RepositoryName)
+    dockerImage(RepositoryName)
+}
+
+def checkoutProject(RepositoryName,Branch){
+   stage('Project code pull from GitHub'){
+      	if(RepositoryName.equalsIgnoreCase("helloservice")){
+			   checkout([$class: 'GitSCM',branches:[[name: Branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class:'CloneOption', depth: 0, noTags: false, reference: '', shallow: false, timeout: 60]], gitTool: 'Default', submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/pankaj0590/spring-boot-hello-world.git' ]]])
+      	}else{
+			echo "Invalid Repository"
+	  	}
+   }
+}
+
+def build(RepositoryName) {
+  stage('Maven Build'){
+   withEnv(['PATH+EXTRA=/usr/java/jdk1.8.0_141/bin:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/src/apache-maven/bin']) {
+	echo "Build Step"
+        def mvnHome = tool 'M3'
+        def javaHome = tool 'java1.8'
+    
+        //sh 'chmod -R +x ./scripts/*'
+      	sh "$mvnHome/bin/mvn -version"
+        sh "$mvnHome/bin/mvn clean install"
+        sh "$mvnHome/bin/mvn  jar:jar install:install"
+        //sh "$mvnHome/bin/mvn surefire-report:report-only"
+        //sh "mvn site -DgenerateReports=false"
+        echo "This is maven build"
+    }
+    }
+  }
+}
+
+def dockerImage (RepositoryName) {
+	stage ('Create Docker Image') {
+	echo "Create Docker Image"
+	if(RepositoryName.equalsIgnoreCase("helloservice")){
+		docker.build("dev-spring-boot-hello-world" ,"-f Dockerfile.build .")
+	}
+   }
+}

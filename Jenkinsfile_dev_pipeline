@@ -37,7 +37,7 @@ def build(RepositoryName) {
     }
     }
   }
-}
+
 
 def dockerImage (RepositoryName) {
 	stage ('Create Docker Image') {

@@ -47,3 +47,11 @@ def dockerImage (RepositoryName) {
 	}
    }
 }
+
+def clean() {
+    stage ('Clean WorkSpace') {
+        cleanWs()
+        sh 'pwd'
+        sh 'ls'
+    }
+}

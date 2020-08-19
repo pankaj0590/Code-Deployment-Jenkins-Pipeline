@@ -8,6 +8,7 @@ node {
    	checkoutProject(RepositoryName,Branch)
    	build(RepositoryName)
     dockerImage(RepositoryName)
+    dockerPush(RepositoryName)
 }
 
 def checkoutProject(RepositoryName,Branch){
@@ -44,6 +45,15 @@ def dockerImage (RepositoryName) {
 	echo "Create Docker Image"
 	if(RepositoryName.equalsIgnoreCase("helloservice")){
 		docker.build("dev-spring-boot-hello-world" ,"-f Dockerfile.build .")
+	}
+   }
+}
+dockerPush(RepositoryName){
+   stage ('Docker Image push to ECR') {
+	echo "Docker Image push to ECR"
+	if(RepositoryName.equalsIgnoreCase("helloservice")){
+		docker.withRegistry('757681645441.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:ecr-creds') {
+                docker.image('dev-spring-boot-hello-world').push('latest')
 	}
    }
 }

@@ -53,7 +53,7 @@ def dockerPush(RepositoryName){
 	echo "Docker Image push to ECR"
 	if(RepositoryName.equalsIgnoreCase("helloservice")){
 		docker.withRegistry('https://757681645441.dkr.ecr.us-east-1.amazonaws.com/myecr', 'ecr:us-east-1:dev_user') {
-                bat 'docker push dev-spring-boot-hello-world:latest'
+                docker push 757681645441.dkr.ecr.us-east-1.amazonaws.com/myecr:latest
 		}
 	}
    }

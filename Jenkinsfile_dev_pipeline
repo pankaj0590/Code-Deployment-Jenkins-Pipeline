@@ -48,7 +48,7 @@ def dockerImage (RepositoryName) {
 	}
    }
 }
-dockerPush(RepositoryName){
+def dockerPush(RepositoryName){
    stage ('Docker Image push to ECR') {
 	echo "Docker Image push to ECR"
 	if(RepositoryName.equalsIgnoreCase("helloservice")){

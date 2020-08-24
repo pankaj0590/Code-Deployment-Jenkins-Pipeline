@@ -65,6 +65,10 @@ def dockerPush(RepositoryName){
 def deployToEcs(RepositoryName) {
 	stage ('Deploy the service on AWS ECS Cluster') {
 	         echo "deploying on aws ECS cluster"
+		 sh 'chmod -R +x ./scripts'
+		 parameter_file='./scripts/DEV/parameters_file.dat'
+		 sh "./scripts/ecs_deploy.sh $parameter_file ~/.aws/credentials"
+		 echo "Updated Task and Service "
 }
 }
 

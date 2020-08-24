@@ -7,9 +7,9 @@ node {
    	clean()
    	checkoutProject(RepositoryName,Branch)
    	build(RepositoryName)
-    dockerImage(RepositoryName)
-    dockerPush(RepositoryName)
-    deployToEcs(RepositoryName)
+        dockerImage(RepositoryName)
+        dockerPush(RepositoryName)
+        deployToEcs(RepositoryName)
 }
 
 def checkoutProject(RepositoryName,Branch){

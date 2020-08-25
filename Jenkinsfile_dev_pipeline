@@ -80,9 +80,7 @@ def deployToEcs(RepositoryName) {
                    assignPublicIp true
                 }
            
-            steps {
-                sh 'ansible -h'
-            }
+            
 }
 }
 

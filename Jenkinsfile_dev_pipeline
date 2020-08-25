@@ -65,10 +65,24 @@ def dockerPush(RepositoryName){
 def deployToEcs(RepositoryName) {
 	stage ('Deploy the service on AWS ECS Cluster') {
 	         echo "deploying on aws ECS cluster"
-		 sh 'chmod -R +x ./scripts'
-		 parameter_file='./scripts/DEV/parameters_file.dat'
-		 sh "./scripts/ecs_deploy.sh $parameter_file ~/.aws/credentials"
-		 echo "Updated Task and Service "
+		 agent {
+
+                ecs {
+                   cloud 'aws-fargate-cluster'
+                   image '757681645441.dkr.ecr.us-east-1.amazonaws.com/dev-spring-boot-hello-world'
+                   launchType 'FARGATE'
+                   memory 1024
+                   cpu 256
+                   subnets('subnet-0e76fbe0267b54f37')
+                   securityGroups('g-05a3284af3184de15')
+                   taskrole 'arn:aws:iam::757681645441:role/ecsTaskExecutionRole'
+                   executionRole 'arn:aws:iam::757681645441:role/ecsTaskExecutionRole'
+                   assignPublicIp true
+                }
+            }
+            steps {
+                sh 'ansible -h'
+            }
 }
 }
 

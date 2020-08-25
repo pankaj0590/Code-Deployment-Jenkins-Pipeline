@@ -69,7 +69,7 @@ def deployToEcs(RepositoryName) {
 
                 ecs {
                    cloud 'aws-fargate-cluster'
-                   image '757681645441.dkr.ecr.us-east-1.amazonaws.com/dev-spring-boot-hello-world'
+                   image '757681645441.dkr.ecr.us-east-1.amazonaws.com/dev-spring-boot-hello-world:latest'
                    launchType 'FARGATE'
                    memory 1024
                    cpu 256

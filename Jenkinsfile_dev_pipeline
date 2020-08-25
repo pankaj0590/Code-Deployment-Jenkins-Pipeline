@@ -65,7 +65,7 @@ def dockerPush(RepositoryName){
 def deployToEcs(RepositoryName) {
 	stage ('Deploy the service on AWS ECS Cluster') {
 	         echo "deploying on aws ECS cluster"
-		 agent {
+		 
 
                 ecs {
                    cloud 'aws-fargate-cluster'
@@ -79,7 +79,7 @@ def deployToEcs(RepositoryName) {
                    executionRole 'arn:aws:iam::757681645441:role/ecsTaskExecutionRole'
                    assignPublicIp true
                 }
-            }
+           
             steps {
                 sh 'ansible -h'
             }

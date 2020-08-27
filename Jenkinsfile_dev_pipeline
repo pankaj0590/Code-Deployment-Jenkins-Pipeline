@@ -70,7 +70,7 @@ def deployToEcs(RepositoryName) {
                sh 'chmod -R +x ./scripts'
 			 parameter_file='./scripts/DEV/parameters_file.dat'
 			// sh "./scripts/ecs_deploy.sh $parameter_file ~/.aws/credentials"
-			sh "./scripts/deployToECS.sh"
+			sh "./scripts/deployToECS.sh /home/ec2-user/.aws/credentials"
 			 echo "Updated Task and Service "
            
             

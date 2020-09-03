@@ -63,7 +63,7 @@ def dockerPush(RepositoryName){
 		
 	} else if(RepositoryName.equalsIgnoreCase("servicewitthdb")){
 		docker.withRegistry('https://757681645441.dkr.ecr.us-east-1.amazonaws.com/dev-spring-boot-api-talk-to-db', 'ecr:us-east-1:dev_user') {
-                docker.image('dev-spring-boot-hello-world').push('latest')
+                docker.image('dev-spring-boot-api-talk-to-db').push('latest')
 		}
 		
 	}

@@ -18,9 +18,7 @@ def checkoutProject(RepositoryName,Branch){
 			   checkout([$class: 'GitSCM',branches:[[name: Branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class:'CloneOption', depth: 0, noTags: false, reference: '', shallow: false, timeout: 60]], gitTool: 'Default', submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/pankaj0590/spring-boot-hello-world.git' ]]])
       	}if(RepositoryName.equalsIgnoreCase("servicewitthdb")){
 			   checkout([$class: 'GitSCM',branches:[[name: Branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class:'CloneOption', depth: 0, noTags: false, reference: '', shallow: false, timeout: 60]], gitTool: 'Default', submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/pankaj0590/spring-boot-api-talk-to-db.git' ]]])
-      	}
-	
-	else{
+      	}else{
 			echo "Invalid Repository"
 	  	}
    }

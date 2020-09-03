@@ -48,7 +48,7 @@ def dockerImage (RepositoryName) {
 	echo "Create Docker Image"
 	if(RepositoryName.equalsIgnoreCase("helloservice")){
 		docker.build("dev-spring-boot-hello-world" ,"-f Dockerfile.build .")
-	}if(RepositoryName.equalsIgnoreCase("servicewitthdb")){
+	} else if(RepositoryName.equalsIgnoreCase("servicewitthdb")){
 		docker.build("dev-spring-boot-api-talk-to-db" ,"-f Dockerfile.build .")
 	}
    }
